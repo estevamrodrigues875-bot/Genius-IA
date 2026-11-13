@@ -1,0 +1,67 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Genius IA</title>
+<style>
+*{box-sizing:border-box}
+body{margin:0;background:#100d20;color:white;font-family:Arial;min-height:100vh}
+header{padding:24px;background:#1c1530;text-align:center}
+h1{color:#c6a6ff;margin:0}
+main{max-width:700px;margin:auto;padding:18px}
+#chat{height:65vh;overflow-y:auto;display:flex;flex-direction:column;gap:12px}
+.msg{padding:13px;border-radius:14px;max-width:85%;white-space:pre-wrap}
+.bot{background:#29203d;align-self:flex-start}
+.user{background:#6840b5;align-self:flex-end}
+form{display:flex;gap:8px;margin-top:15px}
+input{flex:1;min-width:0;padding:14px;border-radius:12px;border:1px solid #8065aa;background:#211a35;color:white;font-size:16px}
+button{padding:14px;border:0;border-radius:12px;background:#8655e8;color:white;font-weight:bold}
+</style>
+</head>
+<body>
+<header><h1>✦ Genius IA</h1><p>Sua inteligência artificial</p></header>
+<main>
+<div id="chat"><div class="msg bot">Olá! Eu sou a Genius IA. Como posso ajudar?</div></div>
+<form id="form">
+<input id="prompt" placeholder="Converse com a Genius..." required>
+<button>Enviar</button>
+</form>
+</main>
+<script>
+const form=document.getElementById('form');
+const input=document.getElementById('prompt');
+const chat=document.getElementById('chat');
+
+function add(text,type){
+ const el=document.createElement('div');
+ el.className='msg '+type;
+ el.textContent=text;
+ chat.appendChild(el);
+ chat.scrollTop=chat.scrollHeight;
+ return el;
+}
+
+form.addEventListener('submit',async e=>{
+ e.preventDefault();
+ const message=input.value.trim();
+ if(!message)return;
+ add(message,'user');
+ input.value='';
+ const wait=add('Pensando...','bot');
+ try{
+  const response=await fetch('/api/chat',{
+   method:'POST',
+   headers:{'Content-Type':'application/json'},
+   body:JSON.stringify({message})
+  });
+  const data=await response.json();
+  wait.textContent=data.reply||data.error||'Não consegui responder.';
+ }catch{
+  wait.textContent='Erro de conexão com o servidor.';
+ }
+});
+</script>
+</body>
+</html>
