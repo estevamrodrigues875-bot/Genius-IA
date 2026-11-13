@@ -1,12 +1,14 @@
+
 {
   "name": "genius-ia",
-  "version": "1.0.0",
+  "version": "2.0.0",
+  "description": "Genius IA - Criada por Estevam",
   "main": "server.js",
   "scripts": {
     "start": "node server.js"
   },
   "dependencies": {
     "express": "^4.21.2",
-    "groq-sdk": "^0.34.0"
+    "groq-sdk": "^0.15.0"
   }
 }
