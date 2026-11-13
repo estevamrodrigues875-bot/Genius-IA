@@ -4,8 +4,11 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#10091c">
+
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0">
+
+    <meta name="theme-color" content="#100B1C">
 
     <title>Genius IA</title>
 
@@ -14,48 +17,70 @@
 
 <body>
 
-    <main class="app-container">
+    <main class="app">
 
-        <header class="chat-header">
-            <div class="logo">
-                <span>G</span>
+        <header class="topbar">
+
+            <div class="logo">G</div>
+
+            <div class="brand">
+                <h1>GENIUS IA</h1>
+                <span>Criada por Estevam</span>
             </div>
 
-            <div class="header-info">
-                <h1>Genius IA</h1>
-                <p>Sua inteligência artificial</p>
-            </div>
+            <button
+                id="newChat"
+                class="header-button"
+                title="Nova conversa">
+                +
+            </button>
+
         </header>
 
-        <section class="chat-container">
+        <section id="chat" class="chat">
 
-            <div id="chatMessages" class="chat-messages">
+            <div id="welcome" class="welcome">
 
-                <div class="message assistant">
-                    <div class="message-content">
-                        Olá! Eu sou a Genius IA.
-                        Como posso ajudar você hoje?
-                    </div>
-                </div>
+                <div class="welcome-logo">G</div>
+
+                <h2>Olá! Eu sou a Genius IA.</h2>
+
+                <p>
+                    Como posso ajudar você hoje?
+                </p>
 
             </div>
 
-            <form id="chatForm" class="chat-input-area">
+            <div id="messages" class="messages"></div>
+
+        </section>
+
+        <footer class="bottom">
+
+            <form id="chatForm" class="input-area">
 
                 <textarea
                     id="messageInput"
-                    placeholder="Converse com a Genius..."
+                    placeholder="Pergunte alguma coisa..."
                     rows="1"
-                    required
-                ></textarea>
+                    maxlength="10000"
+                    required>
+                </textarea>
 
-                <button id="sendButton" type="submit">
-                    Enviar
+                <button
+                    id="sendButton"
+                    type="submit"
+                    title="Enviar">
+                    ➤
                 </button>
 
             </form>
 
-        </section>
+            <div class="footer-info">
+                Genius IA pode cometer erros.
+            </div>
+
+        </footer>
 
     </main>
 
