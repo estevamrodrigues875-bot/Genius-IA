@@ -1,81 +1,114 @@
 
 const express = require("express");
-const { GoogleGenerativeAI } = require("@google/generative-ai");
+const Groq = require("groq-sdk");
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: "2mb" }));
 app.use(express.static("public"));
 
-const genAI = new GoogleGenerativeAI(
-  process.env.GEMINI_API_KEY
-);
+const groq = new Groq({
+  apiKey: process.env.GROQ_API_KEY
+});
 
-// Sistema de novas tentativas
-async function generateWithRetry(request, maxRetries = 3) {
-  for (let attempt = 0; attempt <= maxRetries; attempt++) {
-    try {
-      return await request();
-    } catch (error) {
-      const status =
-        error.status ||
-        error.statusCode ||
-        error.response?.status;
+const PORT = process.env.PORT || 3000;
 
-      const temporaryErrors = [408, 429, 500, 502, 503, 504];
+// Memória temporária por sessão
+const conversations = new Map();
 
-      if (!temporaryErrors.includes(status) ||
-          attempt === maxRetries) {
-        throw error;
-      }
+const SYSTEM_PROMPT = `
+Você é a Genius IA, uma assistente inteligente,
+educada, criativa e prestativa.
 
-      const delay = 1000 * (2 ** attempt);
+Seu criador é Estevam.
 
-      console.log(
-        `Gemini ocupado. Tentativa ${attempt + 1}...`
-      );
+Quando perguntarem quem criou você,
+responda que foi Estevam.
 
-      await new Promise(resolve =>
-        setTimeout(resolve, delay)
-      );
-    }
-  }
-}
+Responda sempre em português brasileiro,
+a menos que o usuário peça outro idioma.
+`;
 
-// Conversa com a Genius IA
+app.get("/", (req, res) => {
+  res.sendFile(__dirname + "/public/index.html");
+});
+
+app.get("/api/status", (req, res) => {
+  res.json({
+    online: true,
+    assistant: "Genius IA",
+    provider: "Groq"
+  });
+});
+
 app.post("/api/chat", async (req, res) => {
   try {
-    const message = req.body.message;
+    const { message, sessionId = "default" } = req.body;
 
-    if (!message || typeof message !== "string") {
-      return res.status(400).json({
-        error: "Mensagem inválida."
+    if (!process.env.GROQ_API_KEY) {
+      return res.status(500).json({
+        error: "Chave GROQ_API_KEY não configurada."
       });
     }
 
-    const model = genAI.getGenerativeModel({
-      model: "gemini-3.8-flash"
+    if (!message || typeof message !== "string") {
+      return res.status(400).json({
+        error: "Envie uma mensagem válida."
+      });
+    }
+
+    let history = conversations.get(sessionId) || [];
+
+    history.push({
+      role: "user",
+      content: message
     });
 
-    const result = await generateWithRetry(
-      () => model.generateContent(message)
-    );
+    // Mantém apenas as últimas mensagens
+    history = history.slice(-20);
 
-    res.json({
-      reply: result.response.text()
+    const completion =
+      await groq.chat.completions.create({
+        model: "llama-3.3-70b-versatile",
+        messages: [
+          {
+            role: "system",
+            content: SYSTEM_PROMPT
+          },
+          ...history
+        ],
+        temperature: 0.7,
+        max_tokens: 1024
+      });
+
+    const reply =
+      completion.choices[0]?.message?.content ||
+      "Não consegui gerar uma resposta.";
+
+    history.push({
+      role: "assistant",
+      content: reply
+    });
+
+    conversations.set(sessionId, history);
+
+    return res.json({
+      reply,
+      assistant: "Genius IA",
+      provider: "Groq"
     });
 
   } catch (error) {
-    console.error("Erro Gemini:", error);
+    console.error("Erro na Groq:", error);
 
-    res.status(503).json({
+    return res.status(500).json({
       error: "A Genius IA está temporariamente ocupada. Tente novamente."
     });
   }
 });
 
-const PORT = process.env.PORT || 3000;
-
-app.listen(PORT, () => {
+app.listen(PORT, "0.0.0.0", () => {
   console.log("Genius IA online!");
+  console.log("Provedor: Groq");
+  console.log("Porta:", PORT);
 });
