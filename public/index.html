@@ -1,10 +1,11 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#10111a">
+    <meta name="theme-color" content="#100D1C">
 
     <title>Genius IA</title>
 
@@ -19,69 +20,25 @@
 
     <aside class="sidebar" id="sidebar">
 
-        <div class="sidebar-header">
-
-            <div class="brand">
-                <div class="brand-icon">G</div>
-                <span>Genius IA</span>
-            </div>
-
-            <button id="closeSidebar" class="icon-button"
-                aria-label="Fechar menu">
-                ×
-            </button>
-
+        <div class="logo">
+            <h2>Genius <span>IA</span></h2>
         </div>
 
-        <button class="new-chat-button" id="newChat">
-            <span>+</span>
-            Nova conversa
+        <button id="newChatBtn" class="new-chat-btn">
+            + Nova conversa
         </button>
 
         <div class="sidebar-section">
+            <h3>Histórico</h3>
 
-            <p class="section-title">MENU</p>
-
-            <button class="sidebar-item active" id="homeButton">
-                <span>⌂</span>
-                Início
-            </button>
-
-            <button class="sidebar-item" id="historyButton">
-                <span>◷</span>
-                Histórico
-            </button>
-
-        </div>
-
-        <div class="history-container">
-
-            <p class="section-title">CONVERSAS RECENTES</p>
-
-            <div id="historyList">
-                <p class="empty-history">
-                    Suas conversas aparecerão aqui.
-                </p>
+            <div id="historyList" class="history-list">
+                <!-- Conversas adicionadas pelo script.js -->
             </div>
-
         </div>
 
         <div class="sidebar-footer">
-
-            <button class="sidebar-item" id="settingsButton">
-                <span>⚙</span>
-                Configurações
-            </button>
-
-            <div class="creator-info">
-                <div class="creator-avatar">G</div>
-
-                <div>
-                    <strong>Genius IA</strong>
-                    <small>Assistente inteligente</small>
-                </div>
-            </div>
-
+            <p>Genius IA</p>
+            <small>Criada por Estevam</small>
         </div>
 
     </aside>
@@ -91,23 +48,16 @@
 
     <main class="main-content">
 
-        <!-- BARRA SUPERIOR -->
-
         <header class="topbar">
 
-            <button id="openSidebar" class="icon-button"
-                aria-label="Abrir menu">
+            <button id="menuBtn" class="menu-btn">
                 ☰
             </button>
 
-            <div class="topbar-brand">
-                <span class="brand-icon small">G</span>
-                <strong>Genius IA</strong>
-            </div>
+            <h3>Genius IA</h3>
 
-            <button id="topNewChat" class="icon-button"
-                aria-label="Nova conversa">
-                +
+            <button id="homeBtn" class="home-btn">
+                Início
             </button>
 
         </header>
@@ -115,315 +65,85 @@
 
         <!-- TELA INICIAL -->
 
-        <section id="homeScreen" class="home-screen">
+        <section id="welcomeScreen" class="welcome-screen">
 
-            <div class="welcome-area">
+            <div class="welcome-content">
 
-                <div class="welcome-logo">
+                <div class="genius-logo">
                     G
                 </div>
 
-                <h1>Olá! Sou a Genius IA.</h1>
+                <h1>Olá, seja bem-vindo!</h1>
+
+                <h2>Eu sou a Genius IA.</h2>
 
                 <p>
-                    O que vamos fazer hoje?
+                    Sua inteligência artificial para criar,
+                    aprender, pesquisar e conversar.
                 </p>
 
-            </div>
-
-
-            <!-- ATALHOS -->
-
-            <div class="feature-grid">
-
-                <button class="feature-card"
-                    data-mode="chat">
-
-                    <div class="feature-icon">✦</div>
-
-                    <h3>Conversar</h3>
-
-                    <p>
-                        Converse comigo e tire suas dúvidas.
-                    </p>
-
+                <button id="startChatBtn">
+                    Começar conversa
                 </button>
 
-
-                <button class="feature-card"
-                    data-mode="image">
-
-                    <div class="feature-icon">▧</div>
-
-                    <h3>Criar imagens</h3>
-
-                    <p>
-                        Transforme suas ideias em imagens.
-                    </p>
-
-                </button>
-
-
-                <button class="feature-card"
-                    data-mode="video">
-
-                    <div class="feature-icon">▷</div>
-
-                    <h3>Criar vídeos</h3>
-
-                    <p>
-                        Crie vídeos a partir de descrições.
-                    </p>
-
-                </button>
-
-
-                <button class="feature-card"
-                    data-mode="files">
-
-                    <div class="feature-icon">▤</div>
-
-                    <h3>Enviar arquivos</h3>
-
-                    <p>
-                        Envie documentos e arquivos para analisar.
-                    </p>
-
-                </button>
-
-            </div>
-
-
-            <!-- CAMPO INICIAL -->
-
-            <div class="home-input-area">
-
-                <form id="homeForm">
-
-                    <textarea
-                        id="homeInput"
-                        placeholder="Pergunte alguma coisa..."
-                        rows="1">
-                    </textarea>
-
-                    <div class="input-actions">
-
-                        <div class="input-left">
-
-                            <button type="button"
-                                class="attachment-button"
-                                id="homeAttach">
-                                + Anexar
-                            </button>
-
-                        </div>
-
-                        <button type="submit"
-                            class="send-button">
-                            Enviar
-                        </button>
-
-                    </div>
-
-                </form>
+                <small>Uma criação de Estevam.</small>
 
             </div>
 
         </section>
 
 
-        <!-- TELA DO CHAT -->
+        <!-- ÁREA DO CHAT -->
 
-        <section id="chatScreen" class="chat-screen" hidden>
+        <section id="chatScreen" class="chat-screen hidden">
 
-            <div class="chat-header">
+            <div id="chatMessages" class="chat-messages">
 
-                <div>
-                    <h2 id="chatTitle">Nova conversa</h2>
-                    <small>Genius IA</small>
-                </div>
-
-                <button id="clearChat"
-                    class="icon-button"
-                    aria-label="Limpar conversa">
-                    ⋯
-                </button>
+                <!-- Mensagens aparecem aqui -->
 
             </div>
-
-
-            <!-- MENSAGENS -->
-
-            <div id="messagesContainer"
-                class="messages-container">
-
-                <div class="assistant-message">
-
-                    <div class="message-avatar">G</div>
-
-                    <div class="message-content">
-
-                        <strong>Genius IA</strong>
-
-                        <p>
-                            Olá! Como posso ajudar você hoje?
-                        </p>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-
-            <!-- ANEXOS SELECIONADOS -->
-
-            <div id="attachmentPreview"
-                class="attachment-preview">
-            </div>
-
-
-            <!-- CAMPO DE MENSAGEM -->
 
             <div class="chat-input-area">
 
-                <form id="chatForm">
+                <div class="attachment-preview"
+                     id="attachmentPreview">
+                </div>
+
+                <div class="input-container">
+
+                    <input
+                        type="file"
+                        id="fileInput"
+                        hidden
+                        multiple
+                    >
+
+                    <button
+                        id="attachBtn"
+                        type="button"
+                        title="Anexar arquivo"
+                    >
+                        +
+                    </button>
 
                     <textarea
-                        id="chatInput"
-                        placeholder="Digite sua mensagem..."
-                        rows="1">
-                    </textarea>
+                        id="messageInput"
+                        placeholder="Converse com a Genius..."
+                        rows="1"
+                    ></textarea>
 
+                    <button
+                        id="sendBtn"
+                        type="button"
+                    >
+                        Enviar
+                    </button>
 
-                    <div class="input-actions">
+                </div>
 
-                        <div class="input-left">
-
-                            <button type="button"
-                                id="attachButton"
-                                class="attachment-button">
-                                + Anexar
-                            </button>
-
-                            <button type="button"
-                                id="voiceButton"
-                                class="attachment-button">
-                                Voz
-                            </button>
-
-                        </div>
-
-                        <button type="submit"
-                            id="sendButton"
-                            class="send-button">
-                            Enviar
-                        </button>
-
-                    </div>
-
-                </form>
-
-                <p class="disclaimer">
+                <p class="input-disclaimer">
                     A Genius IA pode cometer erros. Confira informações importantes.
                 </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- TELA DE HISTÓRICO -->
-
-        <section id="historyScreen"
-            class="history-screen"
-            hidden>
-
-            <div class="page-heading">
-
-                <h1>Histórico de conversas</h1>
-
-                <p>
-                    Encontre suas conversas anteriores.
-                </p>
-
-            </div>
-
-            <div class="history-page-actions">
-
-                <button id="deleteAllHistory"
-                    class="delete-button">
-                    Apagar todo o histórico
-                </button>
-
-            </div>
-
-            <div id="fullHistoryList"
-                class="full-history-list">
-
-                <p>
-                    Suas conversas aparecerão aqui.
-                </p>
-
-            </div>
-
-        </section>
-
-
-        <!-- TELA DE CONFIGURAÇÕES -->
-
-        <section id="settingsScreen"
-            class="settings-screen"
-            hidden>
-
-            <div class="page-heading">
-
-                <h1>Configurações</h1>
-
-                <p>
-                    Personalize sua experiência com a Genius IA.
-                </p>
-
-            </div>
-
-            <div class="settings-group">
-
-                <h3>Voz</h3>
-
-                <label for="voiceType">
-                    Tipo de voz
-                </label>
-
-                <select id="voiceType">
-                    <option value="default">Padrão</option>
-                    <option value="male">Masculina</option>
-                    <option value="female">Feminina</option>
-                </select>
-
-                <p>
-                    As opções disponíveis dependerão das vozes
-                    compatíveis com o sistema.
-                </p>
-
-            </div>
-
-
-            <div class="settings-group">
-
-                <h3>Idioma</h3>
-
-                <label for="languageSelect">
-                    Idioma de preferência
-                </label>
-
-                <select id="languageSelect">
-                    <option value="auto">Detectar automaticamente</option>
-                    <option value="pt-BR">Português</option>
-                    <option value="en">Inglês</option>
-                    <option value="es">Espanhol</option>
-                    <option value="fr">Francês</option>
-                    <option value="de">Alemão</option>
-                </select>
 
             </div>
 
@@ -433,49 +153,7 @@
 
 </div>
 
-
-<!-- INPUTS DE ARQUIVOS -->
-
-<input
-    type="file"
-    id="fileInput"
-    accept="image/*,video/*,.pdf,.txt,.doc,.docx,.xls,.xlsx"
-    multiple
-    hidden
->
-
-
-<input
-    type="file"
-    id="imageInput"
-    accept="image/*"
-    multiple
-    hidden
->
-
-
-<input
-    type="file"
-    id="videoInput"
-    accept="video/*"
-    multiple
-    hidden
->
-
-
-<!-- ÁREA DE NOTIFICAÇÕES -->
-
-<div id="notification"
-    class="notification"
-    role="status"
-    aria-live="polite">
-</div>
-
-
-<!-- JAVASCRIPT PRINCIPAL -->
-
-<script src="/script.js" defer></script>
+<script src="/script.js"></script>
 
 </body>
- </html>
- 
+</html>
