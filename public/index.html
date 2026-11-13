@@ -5,7 +5,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#100D1C">
+    <meta name="theme-color" content="#10091c">
 
     <title>Genius IA</title>
 
@@ -14,146 +14,52 @@
 
 <body>
 
-<div class="app-container">
+    <main class="app-container">
 
-    <!-- MENU LATERAL -->
-
-    <aside class="sidebar" id="sidebar">
-
-        <div class="logo">
-            <h2>Genius <span>IA</span></h2>
-        </div>
-
-        <button id="newChatBtn" class="new-chat-btn">
-            + Nova conversa
-        </button>
-
-        <div class="sidebar-section">
-            <h3>Histórico</h3>
-
-            <div id="historyList" class="history-list">
-                <!-- Conversas adicionadas pelo script.js -->
+        <header class="chat-header">
+            <div class="logo">
+                <span>G</span>
             </div>
-        </div>
 
-        <div class="sidebar-footer">
-            <p>Genius IA</p>
-            <small>Criada por Estevam</small>
-        </div>
-
-    </aside>
-
-
-    <!-- ÁREA PRINCIPAL -->
-
-    <main class="main-content">
-
-        <header class="topbar">
-
-            <button id="menuBtn" class="menu-btn">
-                ☰
-            </button>
-
-            <h3>Genius IA</h3>
-
-            <button id="homeBtn" class="home-btn">
-                Início
-            </button>
-
+            <div class="header-info">
+                <h1>Genius IA</h1>
+                <p>Sua inteligência artificial</p>
+            </div>
         </header>
 
-
-        <!-- TELA INICIAL -->
-
-        <section id="welcomeScreen" class="welcome-screen">
-
-            <div class="welcome-content">
-
-                <div class="genius-logo">
-                    G
-                </div>
-
-                <h1>Olá, seja bem-vindo!</h1>
-
-                <h2>Eu sou a Genius IA.</h2>
-
-                <p>
-                    Sua inteligência artificial para criar,
-                    aprender, pesquisar e conversar.
-                </p>
-
-                <button id="startChatBtn">
-                    Começar conversa
-                </button>
-
-                <small>Uma criação de Estevam.</small>
-
-            </div>
-
-        </section>
-
-
-        <!-- ÁREA DO CHAT -->
-
-        <section id="chatScreen" class="chat-screen hidden">
+        <section class="chat-container">
 
             <div id="chatMessages" class="chat-messages">
 
-                <!-- Mensagens aparecem aqui -->
+                <div class="message assistant">
+                    <div class="message-content">
+                        Olá! Eu sou a Genius IA.
+                        Como posso ajudar você hoje?
+                    </div>
+                </div>
 
             </div>
 
-            <div class="chat-input-area">
+            <form id="chatForm" class="chat-input-area">
 
-                <div class="attachment-preview"
-                     id="attachmentPreview">
-                </div>
+                <textarea
+                    id="messageInput"
+                    placeholder="Converse com a Genius..."
+                    rows="1"
+                    required
+                ></textarea>
 
-                <div class="input-container">
+                <button id="sendButton" type="submit">
+                    Enviar
+                </button>
 
-                    <input
-                        type="file"
-                        id="fileInput"
-                        hidden
-                        multiple
-                    >
-
-                    <button
-                        id="attachBtn"
-                        type="button"
-                        title="Anexar arquivo"
-                    >
-                        +
-                    </button>
-
-                    <textarea
-                        id="messageInput"
-                        placeholder="Converse com a Genius..."
-                        rows="1"
-                    ></textarea>
-
-                    <button
-                        id="sendBtn"
-                        type="button"
-                    >
-                        Enviar
-                    </button>
-
-                </div>
-
-                <p class="input-disclaimer">
-                    A Genius IA pode cometer erros. Confira informações importantes.
-                </p>
-
-            </div>
+            </form>
 
         </section>
 
     </main>
 
-</div>
-
-<script src="/script.js"></script>
+    <script src="/script.js"></script>
 
 </body>
 </html>
