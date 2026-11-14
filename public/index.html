@@ -1,14 +1,10 @@
 
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
-
-    <meta name="viewport"
-          content="width=device-width, initial-scale=1.0">
-
-    <meta name="theme-color" content="#100B1C">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#100D1C">
 
     <title>Genius IA</title>
 
@@ -17,29 +13,30 @@
 
 <body>
 
-    <main class="app">
+    <div class="app-container">
 
+        <!-- CABEÇALHO -->
         <header class="topbar">
 
-            <div class="logo">G</div>
-
             <div class="brand">
-                <h1>GENIUS IA</h1>
-                <span>Criada por Estevam</span>
+                <div class="brand-icon">G</div>
+
+                <div class="brand-info">
+                    <h1>Genius IA</h1>
+                    <span>Inteligência Artificial</span>
+                </div>
             </div>
 
-            <button
-                id="newChat"
-                class="header-button"
-                title="Nova conversa">
+            <button id="newChatBtn" class="icon-button" title="Nova conversa">
                 +
             </button>
 
         </header>
 
-        <section id="chat" class="chat">
+        <!-- ÁREA PRINCIPAL -->
+        <main class="chat-container">
 
-            <div id="welcome" class="welcome">
+            <section id="welcomeScreen" class="welcome-screen">
 
                 <div class="welcome-logo">G</div>
 
@@ -49,42 +46,73 @@
                     Como posso ajudar você hoje?
                 </p>
 
+            </section>
+
+            <!-- MENSAGENS -->
+            <section
+                id="chatMessages"
+                class="chat-messages"
+                aria-live="polite"
+            ></section>
+
+            <!-- INDICADOR DE CARREGAMENTO -->
+            <div id="loadingIndicator" class="loading-indicator" hidden>
+                <span></span>
+                <span></span>
+                <span></span>
             </div>
 
-            <div id="messages" class="messages"></div>
+        </main>
 
-        </section>
+        <!-- ÁREA DE ENVIO -->
+        <footer class="input-area">
 
-        <footer class="bottom">
+            <form id="chatForm" class="input-box">
 
-            <form id="chatForm" class="input-area">
+                <input
+                    type="file"
+                    id="fileInput"
+                    hidden
+                    multiple
+                >
+
+                <button
+                    type="button"
+                    id="attachBtn"
+                    class="input-button"
+                    title="Anexar arquivo"
+                >
+                    +
+                </button>
 
                 <textarea
                     id="messageInput"
                     placeholder="Pergunte alguma coisa..."
                     rows="1"
-                    maxlength="10000"
-                    required>
-                </textarea>
+                    maxlength="12000"
+                    aria-label="Digite sua mensagem"
+                ></textarea>
 
                 <button
-                    id="sendButton"
                     type="submit"
-                    title="Enviar">
-                    ➤
+                    id="sendBtn"
+                    class="send-button"
+                    title="Enviar mensagem"
+                >
+                    ↑
                 </button>
 
             </form>
 
-            <div class="footer-info">
-                Genius IA pode cometer erros.
+            <div class="footer-text">
+                Genius IA pode cometer erros. Confira informações importantes.
             </div>
 
         </footer>
 
-    </main>
+    </div>
 
-    <script src="/script.js"></script>
+    <script src="/script.js" defer></script>
 
 </body>
 </html>
